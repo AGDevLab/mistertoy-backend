@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "t101",
+    "name": "Talking Doll",
+    "price": 123,
+    "labels": ["Doll", "Battery Powered", "Baby"],
+    "createdAt": 1631031801011,
+    "inStock": true
+  },
+  {
+    "_id": "t102",
+    "name": "Adventure Kit",
+    "price": 75,
+    "labels": ["Outdoor", "Art", "Puzzle"],
+    "createdAt": 1632115401011,
+    "inStock": true
+  },
+  {
+    "_id": "t103",
+    "name": "Racer Baby Doll",
+    "price": 220,
+    "labels": ["Baby", "On wheels", "Doll"],
+    "createdAt": 1633199001011,
+    "inStock": true
+  },
+  {
+    "_id": "t104",
+    "name": "Electric Creativity Puzzle",
+    "price": 140,
+    "labels": ["Battery Powered", "Box game", "Art"],
+    "createdAt": 1634282601011,
+    "inStock": true
+  },
+  {
+    "_id": "t105",
+    "name": "Explorers Puzzle Set",
+    "price": 95,
+    "labels": ["Outdoor", "Puzzle", "Baby"],
+    "createdAt": 1635366201011,
+    "inStock": true
+  },
+  {
+    "_id": "t106",
+    "name": "Painter Rolling Doll",
+    "price": 180,
+    "labels": ["Art", "On wheels", "Doll"],
+    "createdAt": 1636449801011,
+    "inStock": true
+  }
+]
