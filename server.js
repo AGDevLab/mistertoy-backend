@@ -3,9 +3,9 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
-// import { toyService } from './services/toy.service.js'
+import { toyService } from './services/toy.service.js'
 // import { userService } from './services/user.service.js'
-// import { loggerService } from './services/logger.service.js'
+import { loggerService } from './services/logger.service.js'
 
 const app = express()
 
@@ -21,107 +21,108 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 // Express Config:
-app.use(express.static(''))
+app.use(express.static('/'))
 // app.use(express.static('public'))
-app.use(cookieParser())
+// app.use(cookieParser())
 app.use(express.json())
 
 // // REST API for Toys
 
-// // Toy LIST
-// app.get('/api/toy', (req, res) => {
-//   console.log('get list')
-//   const filterBy = {
-//     txt: req.query.txt || '',
-//     maxPrice: +req.query.maxPrice || 0,
-//   }
-//   toyService
-//     .query(filterBy)
-//     .then((toys) => {
-//       res.send(toys)
-//     })
-//     .catch((err) => {
-//       loggerService.error('Cannot get toys', err)
-//       res.status(400).send('Cannot get toys')
-//     })
-// })
+// Toy LIST
+app.get('/api/toy', (req, res) => {
+  console.log('get list')
+  const filterBy = {
+    name: req.query.name || '',
+    price: +req.query.price || 0,
+  }
+  toyService
+    .query(filterBy)
+    .then((toys) => {
+      res.send(toys)
+    })
+    .catch((err) => {
+      loggerService.error('Cannot get toys', err)
+      res.status(400).send('Cannot get toys')
+    })
+})
 
-// // Toy READ
-// app.get('/api/toy/:toyId', (req, res) => {
-//   const { toyId } = req.params
-//   toyService
-//     .getById(toyId)
-//     .then((toy) => {
-//       res.send(toy)
-//     })
-//     .catch((err) => {
-//       loggerService.error('Cannot get toy', err)
-//       res.status(400).send('Cannot get toy')
-//     })
-// })
+// Toy READ
+app.get('/api/toy/:toyId', (req, res) => {
+  const { toyId } = req.params
+  toyService
+    .getById(toyId)
+    .then((toy) => {
+      res.send(toy)
+    })
+    .catch((err) => {
+      loggerService.error('Cannot get toy', err)
+      res.status(400).send('Cannot get toy')
+    })
+})
 
-// // Toy CREATE
-// app.post('/api/toy', (req, res) => {
-//   const loggedinUser = userService.validateToken(req.cookies.loginToken)
-//   if (!loggedinUser) return res.status(401).send('Cannot add toy')
-//   const toy = {
-//     vendor: req.body.vendor,
-//     price: +req.body.price,
-//     speed: +req.body.speed,
-//   }
-//   toyService
-//     .save(toy, loggedinUser)
-//     .then((savedToy) => {
-//       res.send(savedToy)
-//     })
-//     .catch((err) => {
-//       loggerService.error('Cannot save toy', err)
-//       res.status(400).send('Cannot save toy')
-//     })
-// })
+// Toy CREATE
+app.post('/api/toy', (req, res) => {
+  // const loggedinUser = userService.validateToken(req.cookies.loginToken)
+  // if (!loggedinUser) return res.status(401).send('Cannot add toy')
+  const toy = {
+    name: req.body.name,
+    price: +req.body.price,
+  }
+  toyService
+    .save(toy)
+    // .save(toy, loggedinUser)
+    .then((savedToy) => {
+      res.send(savedToy)
+    })
+    .catch((err) => {
+      loggerService.error('Cannot save toy', err)
+      res.status(400).send('Cannot save toy')
+    })
+})
 
-// // Toy UPDATE
-// app.put('/api/toy', (req, res) => {
-//   const loggedinUser = userService.validateToken(req.cookies.loginToken)
-//   if (!loggedinUser) return res.status(401).send('Cannot update toy')
-//   const toy = {
-//     _id: req.body._id,
-//     vendor: req.body.vendor,
-//     speed: +req.body.speed,
-//     price: +req.body.price,
-//   }
-//   toyService
-//     .save(toy, loggedinUser)
-//     .then((savedToy) => {
-//       res.send(savedToy)
-//     })
-//     .catch((err) => {
-//       loggerService.error('Cannot save toy', err)
-//       res.status(400).send('Cannot save toy')
-//     })
-// })
+// Toy UPDATE
+app.put('/api/toy', (req, res) => {
+  // const loggedinUser = userService.validateToken(req.cookies.loginToken)
+  // if (!loggedinUser) return res.status(401).send('Cannot update toy')
+  const toy = {
+    _id: req.body._id,
+    name: req.body.name,
+    price: +req.body.price,
+  }
+  toyService
+    // .save(toy, loggedinUser)
+    .save(toy)
+    .then((savedToy) => {
+      res.send(savedToy)
+    })
+    .catch((err) => {
+      loggerService.error('Cannot save toy', err)
+      res.status(400).send('Cannot save toy')
+    })
+})
 
-// // Toy DELETE
-// app.delete('/api/toy/:toyId', (req, res) => {
-//   const loggedinUser = userService.validateToken(req.cookies.loginToken)
-//   loggerService.info('loggedinUser toy delete:', loggedinUser)
-//   if (!loggedinUser) {
-//     loggerService.info('Cannot remove toy, No user')
-//     return res.status(401).send('Cannot remove toy')
-//   }
+// Toy DELETE
+app.delete('/api/toy/:toyId', (req, res) => {
+  // const loggedinUser = userService.validateToken(req.cookies.loginToken)
+  // loggerService.info('loggedinUser toy delete:', loggedinUser)
+  // if (!loggedinUser) {
+  //   loggerService.info('Cannot remove toy, No user')
+  //   return res.status(401).send('Cannot remove toy')
+  // }
 
-//   const { toyId } = req.params
-//   toyService
-//     .remove(toyId, loggedinUser)
-//     .then(() => {
-//       loggerService.info(`Toy ${toyId} removed`)
-//       res.send('Removed!')
-//     })
-//     .catch((err) => {
-//       loggerService.error('Cannot remove toy', err)
-//       res.status(400).send('Cannot remove toy')
-//     })
-// })
+  const { toyId } = req.params
+  toyService
+    // .remove(toyId, loggedinUser)
+    .remove(toyId)
+    .then(() => {
+      loggerService.info(`Toy ${toyId} removed`)
+      res.send('Removed!')
+    })
+    .catch((err) => {
+      loggerService.error('Cannot remove toy', err)
+      res.status(400).send('Cannot remove toy')
+    })
+})
 
 // AUTH API
 // app.get('/api/user', (req, res) => {
