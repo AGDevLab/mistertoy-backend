@@ -2,7 +2,7 @@
     {
         "_id": "t102",
         "name": "Adventure Kit",
-        "price": 75,
+        "price": 300,
         "labels": [
             "Outdoor",
             "Art",
@@ -14,7 +14,7 @@
     {
         "_id": "t103",
         "name": "Racer Baby Doll",
-        "price": 220,
+        "price": 900,
         "labels": [
             "Baby",
             "On wheels",
@@ -36,18 +36,6 @@
         "inStock": true
     },
     {
-        "_id": "t105",
-        "name": "Explorers Puzzle Set",
-        "price": 95,
-        "labels": [
-            "Outdoor",
-            "Puzzle",
-            "Baby"
-        ],
-        "createdAt": 1635366201011,
-        "inStock": true
-    },
-    {
         "_id": "t106",
         "name": "Painter Rolling Doll",
         "price": 180,
@@ -63,5 +51,10 @@
         "name": "Mega Doll",
         "price": 100,
         "_id": "KXkoH"
+    },
+    {
+        "name": "Doll-686",
+        "price": 3002,
+        "_id": "v2tJU"
     }
 ]
